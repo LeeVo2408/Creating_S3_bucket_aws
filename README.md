@@ -1,4 +1,4 @@
- #How to write a Bash Script to configure a static websit on Amazon S3.
+ # How to write a Bash Script to configure a static websit on Amazon S3.
 
 
 Ensuring that you have authenticated to AWS with CLI before starting the tutorial.
