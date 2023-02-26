@@ -39,7 +39,7 @@ aws s3api put-bucket-policy \
 
 
 
-# 4. Enable the s3 bucket to host an `index` and `error` html page
+# 4. Enable the s3 bucket to host an `index` html page
 mkdir -p ./awsfiles
 echo "Creating awsfiles directory"
 touch ./awsfiles/index.html
