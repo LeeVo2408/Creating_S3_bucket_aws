@@ -1,11 +1,11 @@
- # How to write a Bash Script to configure a static websit on Amazon S3.
+# How to write a Bash Script to configure a static websit on Amazon S3.
 
-
-Ensuring that you have authenticated to AWS with CLI before starting the tutorial.
+Ensuring that you have [authenticated to AWS with CLI](https://uts-edu.atlassian.net/wiki/spaces/CET/pages/49678450/AWS+using+Session+Manager+for+SSH+PowerShell#Authenticating-to-AWS-with-CLI) before starting the tutorial.
 
 If you have done so, please also login to your account via SSO (aws sso login --profile "your profile number-find in ./.aws/config ")
 
-Step 1: Create a bucket
+## Step 1: Create a bucket 
+```
 read -r -p "Enter the name of the bucket:" bucket_name
 read -r -p "Enter Profile number:" profile
 website_directory='./awsfiles'
@@ -13,20 +13,26 @@ website_directory='./awsfiles'
 
 # 1. Create a new bucket 
 aws s3 mb \  $profile\
-'read -r -p' allows you to insert your own profile name and creating bucket with your prefered name.
+```
 
-r: Disable blackslashes to escape character
-p: Outputs the prompt string before reading user input
-Step 2. Enable public access
+'read -r -p' allows you to insert your own profile name and creating bucket with your prefered name. 
+>- r: Disable blackslashes to escape character
+>- p: <prompt> Outputs the prompt string before reading user input 
+
+
+## Step 2. Enable public access
+```
 aws s3api put-public-access-block \
   --profile $profile \
   --bucket $bucket_name \
   --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false"
-'aws s3api put-public-access-block' set the bucet to publicly accessable.
+```
+'aws s3api put-public-access-block' set the bucet to publicly accessable. 
 
-NOTE: The bucket is not publiclly accessible by default
+**NOTE: The bucket is not publiclly accessible by default**
 
-Step 3. Update the bucket policy for public read access:
+## Step 3. Update the bucket policy for public read access:
+```
 aws s3api put-bucket-policy \
   --profile $profile \
   --bucket $bucket_name \
@@ -42,13 +48,16 @@ aws s3api put-bucket-policy \
       }
   ]
 }"
+```
 'aws s3api put-bucket-policy' allows you to create a bucket policy. In this specific case, anyone can get the object of the bucket.
 
-NOTE: Ensure that the policy has to be written in JSON.
+**NOTE: Ensure that the policy has to be written in JSON.**
 
-4. Enable the s3 bucket to host an index html
+
+## 4. Enable the s3 bucket to host an `index` html
 creating a html file locally in your computer.
 
+```
 mkdir -p ./awsfiles
 echo "Creating awsfiles directory"
 touch ./awsfiles/index.html
@@ -67,14 +76,17 @@ cat > ./awsfiles/index.html << EOF
 
 EOF
 
-This creates an index.html file hosted locally in your computer.
+```
 
-./awsfiles/index.html.
+This creates an index.html file hosted locally in your computer. 
+>`./awsfiles/index.html`. 
 
-You can change the website title if you want. Feel free to replace it with any index document you have.
+You can change the website title if you want. Feel free to replace it with any index document you have. 
 
-Step 5: Upload your webseite.
+## Step 5: Upload your webseite.
+```
 aws s3 sync \
   --profile $profile \
   $website_directory "s3://$bucket_name/"
-'aws s3 sync' uploads your website in the S3 bucket. $Website_directory navigate to the local hosted index.html file.
+  ```
+'aws s3 sync' uploads your website in the S3 bucket. `$Website_directory`  navigate to the local hosted index.html file. 
