@@ -90,3 +90,8 @@ aws s3 sync \
   $website_directory "s3://$bucket_name/"
   ```
 'aws s3 sync' uploads your website in the S3 bucket. `$Website_directory`  navigate to the local hosted index.html file. 
+
+
+SOURCES:
+
+https://www.sammeechward.com/aws-cli-s3-static-website
