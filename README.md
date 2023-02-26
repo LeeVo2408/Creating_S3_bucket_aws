@@ -2,7 +2,7 @@
 
 Ensuring that you have [authenticated to AWS with CLI](https://uts-edu.atlassian.net/wiki/spaces/CET/pages/49678450/AWS+using+Session+Manager+for+SSH+PowerShell#Authenticating-to-AWS-with-CLI) before starting the tutorial.
 
-If you have done so, please also login to your account via SSO (aws sso login --profile "your profile number-find in ./.aws/config ")
+If you have done so, please also login to your account via SSO (aws sso login --profile "your profile number-./.aws/config ")
 
 ## Step 1: Create a bucket 
 ```
